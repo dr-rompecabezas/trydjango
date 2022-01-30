@@ -1,0 +1,60 @@
+<!-- django template tags: extends, block, for, if... -->
+<!-- django filters with pipe character: add, capfirst... 
+	(if there are two curly braces, chances are a filter can be used)-->
+<!-- https://docs.djangoproject.com/en/3.2/ref/templates/builtins/ -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<h1>About Us</h1>
+	<p>Cool, eh?</p>
+	{{ my_html|safe}}
+	<p>
+		<!-- context variable -->
+		{{ my_text|capfirst }}: {{ my_number }}
+		{{ my_list }}
+	</p>
+	<ul>
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li>Item 3</li>
+	</ul>
+	<ul>
+		<!-- for loop in template; open and close loop -->
+		{% for my_sub_item in my_list %}
+			<li>{{ forloop.counter }} - {{ my_sub_item }}</li>
+		{% endfor %}
+	</ul>
+	<ul>
+		<!-- if inside for loop; open and close loop and if -->
+		{% for item in my_list %}
+			{% if item == 21 %}
+				<li>{{ forloop.counter }} - {{ item|add:69 }}</li>
+			{% endif %}
+			<li>{{ forloop.counter }} - {{ item }}</li>
+		{% endfor %}
+	</ul>
+	<ul>
+		<!-- if-else inside for loop -->
+		{% for item in my_list %}
+			{% if item == 21 %}
+				<li>{{ forloop.counter }} - {{ item|add:69 }}</li>
+			{% else %}
+				<li>{{ forloop.counter }} - {{ item }}</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+	<ul>
+		<!-- if-elif-else inside for loop -->
+		{% for item in my_list %}
+			{% if item == 21 %}
+				<li>{{ forloop.counter }} - {{ item|add:69 }}</li>
+			{% elif item == 78 %}
+				<li>This is a 78</li>
+			{% else %}
+				<li>{{ forloop.counter }} - {{ item }}</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+
+{% endblock %}
